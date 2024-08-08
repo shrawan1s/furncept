@@ -1,4 +1,4 @@
-import express, { Request, Response, Router } from 'express';
+import { Request, Response, Router } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User, { UserDocument } from '../model/userSchema';
@@ -11,7 +11,7 @@ import { validateForgotPassword, validateResetPassword } from '../middleware/pas
 dotenv.config();
 
 const JWT_SECRET: string = process.env.JWT_SECRET!;
-const router: Router = express.Router();
+const router: Router = Router();
 
 router.post('/createuser', validateCreateUser, async (req: Request<{}, {}, { firstName: string, lastName: string, email: string, password: string }>, res: Response) => {
     try {
