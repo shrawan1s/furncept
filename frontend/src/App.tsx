@@ -7,6 +7,8 @@ import Home from './components/Home';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import ProtectedRoute from './components/ProtectedRoute';
+import HeaderForm from './components/HeaderForm';
+import AddDataForm from './components/AddDataForm';
 
 const App: React.FC = () => {
   return (
@@ -18,6 +20,8 @@ const App: React.FC = () => {
         <Route path='/ForgotPassword' element={<ForgotPassword />} />
         <Route path='/ResetPassword/:resetToken' element={<ResetPassword />} />
         <Route path="/Home" element={<ProtectedRoute component={Home} />} />
+        <Route path="/addHeader" element={<ProtectedRoute component={HeaderForm} />} />
+        <Route path="/addDataForm" element={<ProtectedRoute component={AddDataForm} fieldCount={0} />} />
       </Routes>
     </>
   );
