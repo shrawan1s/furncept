@@ -7,6 +7,7 @@ import { PasswordField } from './PasswordField';
 import CustomSnackbar from './SnackbarComponent';
 import { signup } from '../app/slices/authSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks/hook';
+import { isAuthenticated } from '../utility/AuthUtility';
 
 const SignupForm: React.FC = () => {
     // Defining the useNavigate hook for the navigation.
@@ -29,6 +30,10 @@ const SignupForm: React.FC = () => {
     };
 
     useEffect(() => {
+        if (isAuthenticated()) {
+            navigate("/Home");
+        }
+        
         if (success) {
             setSnackbarSeverity('success');
             setSnackbarMessage('Signup successful');

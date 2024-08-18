@@ -2,7 +2,8 @@ import express, { Request, Response } from "express";
 import cors from 'cors';
 import { connectDB } from "./db";
 import authController from './routes/auth';
-import dataController from './routes/data';
+import customerController from './routes/customer';
+import packingDataController from './routes/packingData';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -20,7 +21,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/api/auth', authController);
-app.use('/api', dataController);
+app.use('/api', customerController);
+app.use('/api', packingDataController);
 
 app.listen(port as number, () => {
   console.log(`Server is running on Port ${port}`);
