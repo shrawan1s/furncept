@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { initialValues, PackingDataFormProps, PackingDataFormValues } from '../utility/PackingDataForm';
 import { validationSchema } from '../schema/PackingDataForm';
 
-const PackingDataForm: React.FC<PackingDataFormProps> = ({ customerId }) => {
+const PackingDataForm: React.FC<PackingDataFormProps> = () => {
     const handleSubmit = (values: PackingDataFormValues) => {
         // Handle packing data creation
         console.log('Packing Data:', values);
