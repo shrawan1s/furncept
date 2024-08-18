@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { isAuthenticated } from '../utility/AuthUtility';
 
-interface ProtectedRouteProps {
+type ProtectedRouteProps = {
   component: React.ComponentType<any>; // Allow component to have any props
   [key: string]: any; // Allow other props to be passed
 }
