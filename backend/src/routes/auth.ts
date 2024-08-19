@@ -9,7 +9,7 @@ const router = Router();
 router.post('/createuser', validateCreateUser, createUser);
 router.post('/login', validateLoginUser, login);
 router.post('/getUser', fetchUser, getUser);
-router.put('/forgotpassword', validateForgotPassword, forgotPassword);
-router.delete('/resetpassword', validateResetPassword, resetPassword);
+router.post('/forgotpassword', validateForgotPassword, forgotPassword);
+router.post('/resetpassword', validateResetPassword, resetPassword);
 
 export default router;
