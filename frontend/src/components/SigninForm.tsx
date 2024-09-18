@@ -3,52 +3,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { SigninSchema } from '../schema/SigninSchema';
 import { initialValues, SigninFormValues } from '../utility/SigninUtility';
-import CustomSnackbar from './SnackbarComponent';
 import { login } from '../app/slices/authSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks/hook';
-import { isAuthenticated } from '../utility/AuthUtility';
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
 
 const SigninForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { error, success, token } = useAppSelector((state) => state.auth);
-
-  const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
-  const [snackbarMessage, setSnackbarMessage] = useState<string>('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState<'error' | 'success' | 'info' | 'warning'>('error');
+  const { token } = useAppSelector((state) => state.auth);
   const [btnDisable, setBtnDisable] = useState<boolean>(false);
-
-  const handleClose = (_event: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setSnackbarOpen(false);
-  };
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   useEffect(() => {
-    if (isAuthenticated()) {
-      navigate("/Home");
+    if (token) {
+      navigate('/Home');
     }
-
-    if (success) {
-      setSnackbarSeverity('success');
-      setSnackbarMessage('Login successful');
-      setSnackbarOpen(true);
-      setBtnDisable(false);
-      if (token) {
-        navigate('/Home');
-      }
-    } else if (error) {
-      setSnackbarSeverity('error');
-      setSnackbarMessage(error);
-      setSnackbarOpen(true);
-      setBtnDisable(false);
-    }
-  }, [success, error, token, navigate]);
+  }, [token, navigate, dispatch]);
 
   const handleSubmit = async (values: SigninFormValues) => {
     setBtnDisable(true);
-    await dispatch(login(values));
+    await dispatch(login(values)).finally(() => setBtnDisable(false));
   };
 
   return (
@@ -59,14 +33,34 @@ const SigninForm: React.FC = () => {
           <Form>
             <div className="mb-4">
               <label htmlFor="email" className="block mb-1">Email</label>
-              <Field type="email" id="email" name="email" className="border p-2 w-full rounded-md outline-none" placeholder="Enter your email" />
+              <Field type="email" id="email" name="email" className="border p-2 w-full rounded-md outline-none" placeholder="Enter your email" autoComplete="email" />
               <div className="h-1">
                 <ErrorMessage name="email" component="div" className="text-red-500" />
               </div>
             </div>
-            <div className="mb-4">
+            <div className="mb-4 relative">
               <label htmlFor="password" className="block mb-1">Password</label>
-              <Field type="password" id="password" name="password" className="border p-2 w-full rounded-md outline-none" placeholder="Enter your password" />
+              <div className="relative">
+                <Field
+                  type={showPassword ? 'text' : 'password'} // Toggle between text and password
+                  id="password"
+                  name="password"
+                  className="border p-2 w-full rounded-md outline-none"
+                  placeholder="Enter your password"
+                  autoComplete="password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-2 top-2 focus:outline-none"
+                >
+                  {showPassword ? (
+                    <EyeSlashIcon className="h-5 w-5 text-gray-600" />
+                  ) : (
+                    <EyeIcon className="h-5 w-5 text-gray-600" />
+                  )}
+                </button>
+              </div>
               <div className="h-1">
                 <ErrorMessage name="password" component="div" className="text-red-500" />
               </div>
@@ -84,7 +78,6 @@ const SigninForm: React.FC = () => {
           </Form>
         </Formik>
       </div>
-      <CustomSnackbar open={snackbarOpen} onClose={handleClose} message={snackbarMessage} severity={snackbarSeverity} />
     </div>
   );
 };

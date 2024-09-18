@@ -9,6 +9,8 @@ import ResetPassword from './components/ResetPassword';
 import ProtectedRoute from './components/ProtectedRoute';
 import CustomerForm from './components/CustomerForm';
 import PackingDataForm from './components/PackingDataForm';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
   return (
@@ -23,6 +25,7 @@ const App: React.FC = () => {
         <Route path="/createCustomer" element={<ProtectedRoute component={CustomerForm} />} />
         <Route path="/addData" element={<ProtectedRoute component={PackingDataForm} />} />
       </Routes>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </>
   );
 };

@@ -164,7 +164,7 @@ const PackingDataForm: React.FC<PackingDataFormProps> = () => {
                             type="submit"
                             className="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-150"
                         >
-                            Submit
+                            Submit & Create QR
                         </button>
                     </Form>
                 </Formik>

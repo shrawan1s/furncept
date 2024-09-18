@@ -15,15 +15,20 @@ export type ForgotPassword = {
     email: string;
 }
 
-export type GetUser = {
-    token: string;
+// Output types of data and error.
+export type User = {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    _v: number
 }
 
-// Output types of data and error.
 type ApiResponseSuccess = {
     success: true;
-    authToken?: string;
+    authToken: string;
     message: string;
+    user: User
 }
 
 export type ApiResponseError = {
@@ -52,11 +57,9 @@ export type ApiResponsePasswordError = {
 }
 
 export type GetUserResponse = {
-    user?: {
-        firstName: string;
-        lastName: string;
-        email: string;
-    };
+    success?: boolean;
+    token?: string;
+    user?: User
     error?: string;
 };
 

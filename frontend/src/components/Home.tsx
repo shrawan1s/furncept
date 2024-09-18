@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PackingList from './PackingList';
 
 const Home: React.FC = () => {
@@ -11,20 +10,6 @@ const Home: React.FC = () => {
           <button className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md shadow-md">
             Generate Report
           </button>
-        </div>
-        <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-6">
-          <Link
-            to="/createCustomer"
-            className="w-full md:w-auto px-6 py-3 bg-blue-500 text-white font-semibold rounded-md text-center"
-          >
-            Create Customer
-          </Link>
-          <Link
-            to="/addData"
-            className="w-full md:w-auto px-6 py-3 bg-green-500 text-white font-semibold rounded-md text-center"
-          >
-            Add Data
-          </Link>
         </div>
       </div>
       <PackingList />
