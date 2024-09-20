@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import mongoose from 'mongoose';
 import PackingData from '../model/packingData';
-import Customer from '../model/customer';
 
 // Add packing data to a customer
 export const createPackingData = async (req: Request, res: Response) => {
@@ -9,26 +7,13 @@ export const createPackingData = async (req: Request, res: Response) => {
         const { customerId, packingData } = req.body;
 
         // Create a new packing data instance
-        const newPackingData = new PackingData({
+        const newPackingData = await PackingData.create({
             ...packingData,
-            customer: new mongoose.Types.ObjectId(customerId) // Ensure customerId is an ObjectId
+            customerId,
         });
 
-        await newPackingData.save();
-
-        // Find the customer and update their packingData array
-        const customerData = await Customer.findById(customerId);
-
-        if (customerData) {
-            // Add the new PackingData's ID to the customer's packingData array
-            customerData.packingData.push(newPackingData._id as mongoose.Types.ObjectId);
-            await customerData.save();  // Save the updated customer
-            return res.status(201).json(newPackingData);
-        } else {
-            return res.status(404).json({ message: 'Customer not found' });
-        }
+        return res.status(201).json(newPackingData);
     } catch (error: any) {
-        console.error('Error in createPackingData:', error); // Improved error logging
         return res.status(500).json({ message: 'Failed to add packing data', error: error.message });
     }
 };
@@ -38,12 +23,7 @@ export const getPackingData = async (req: Request, res: Response) => {
     try {
         const { customerId } = req.params;
 
-        // Fetch all packing data for the given customer
-        const packingData = await PackingData.find({ customer: customerId });
-
-        if (!packingData.length) {
-            return res.status(404).json({ message: 'No packing data found for this customer' });
-        }
+        const packingData = await PackingData.findAll({ where: { customerId } });
 
         res.status(200).json(packingData);
     } catch (error: any) {
@@ -55,17 +35,11 @@ export const getPackingData = async (req: Request, res: Response) => {
 export const updatePackingData = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const updatedPackingData = await PackingData.findByIdAndUpdate(
-            id,
-            { $set: req.body },
-            { new: true }
-        );
+        await PackingData.update(req.body, {
+            where: { id },
+        });
 
-        if (!updatedPackingData) {
-            return res.status(404).json({ message: 'Packing data not found' });
-        }
-
-        res.status(200).json(updatedPackingData);
+        res.status(200).json({ message: 'Packing data updated successfully' });
     } catch (error: any) {
         res.status(500).json({ message: 'Failed to update packing data', error: error.message });
     }
@@ -75,11 +49,9 @@ export const updatePackingData = async (req: Request, res: Response) => {
 export const deletePackingData = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
-        const deletedPackingData = await PackingData.findByIdAndDelete(id);
-
-        if (!deletedPackingData) {
-            return res.status(404).json({ message: 'Packing data not found' });
-        }
+        await PackingData.destroy({
+            where: { id },
+        });
 
         res.status(200).json({ message: 'Packing data deleted successfully' });
     } catch (error: any) {

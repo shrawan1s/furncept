@@ -5,10 +5,19 @@ import { createUser, login, getUser, forgotPassword, resetPassword } from '../co
 
 const router = Router();
 
+// User creation
 router.post('/createuser', validateCreateUser, createUser);
+
+// User login
 router.post('/login', validateLoginUser, login);
+
+// Get user details
 router.get('/getUser', fetchUser, getUser);
+
+// Forgot password
 router.post('/forgotpassword', validateForgotPassword, forgotPassword);
+
+// Reset password
 router.post('/resetpassword', validateResetPassword, resetPassword);
 
 export default router;

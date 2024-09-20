@@ -1,22 +1,20 @@
-import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
 dotenv.config();
 
-const url: string | undefined = process.env.MONGO_URI; // MongoDB connection URL
-
-// Function to connect to MongoDB using Mongoose
-export async function connectDB(): Promise<void> {
-    try {
-        // Connect to MongoDB using Mongoose
-        await mongoose.connect(url as string);
-
-        // Log a success message if the connection is established
-        console.log('Connected to MongoDB');
-    } catch (error) {
-        // Log an error message if there's an issue connecting to MongoDB
-        console.error('Error connecting to MongoDB:', error);
-        // Throw the error to propagate it up the call stack
-        throw error;
+const sequelize = new Sequelize(
+    process.env.DATABASE_NAME as string,
+    process.env.DB_USER_NAME as string,
+    process.env.DB_PASS_WORD as string,
+    {
+        host: process.env.DB_HOST as string,
+        dialect: "mysql",
+        port: parseInt(process.env.DB_PORT as string, 10),
+        dialectOptions: {
+            connectTimeout: 5000
+        }
     }
-}
+);
+
+export default sequelize;
