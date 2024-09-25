@@ -1,27 +1,52 @@
+// Define the structure for the form values
 export type PackingDataFormValues = {
-    customerName: string,
-    top: string;
-    size: number | '';
-    length: number | '';
-    width: number | '';
-    height: number | '';
-    quantity: number | '';
-    colorCode: string;
-    material: string;
-}
+    customerName: string;
+    name: string;
+    label: string;
+    no: string;
+    unit: string;
+    L1: number;
+    L2: number;
+    L3: number;
+    Qty: number;
+    materialThicknessInput: string;
+    outside: string;
+    inside: string;
+    materialThickness: string;
+    edge: string;
+    remark: string;
+    one: number;
+    two: number;
+    three: number;
+    four: number;
+    five?: string;
+};
 
+// Define the props for the packing data form
 export type PackingDataFormProps = {
     customerId: string;
-}
+};
 
+// Set initial values for the form fields
 export const initialValues: PackingDataFormValues = {
     customerName: '',
-    top: '',
-    size: '',
-    length: '',
-    width: '',
-    height: '',
-    quantity: '',
-    colorCode: '',
-    material: ''
+    name: '',
+    label: '',
+    no: '',
+    unit: '',
+    L1: 0,
+    L2: 0,
+    L3: 0,
+    Qty: 0,
+    materialThicknessInput: '',
+    outside: '',
+    inside: '',
+    materialThickness: '',
+    edge: '',
+    remark: '',
+    one: 0,
+    two: 0,
+    three: 0,
+    four: 1,
+    five: '',
 };

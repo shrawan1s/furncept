@@ -16,15 +16,20 @@ const App: React.FC = () => {
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path='/' element={<SigninForm />} />
-        <Route path='/Signup' element={<SignupForm />} />
-        <Route path='/ForgotPassword' element={<ForgotPassword />} />
-        <Route path='/ResetPassword/:resetToken' element={<ResetPassword />} />
-        <Route path="/Home" element={<ProtectedRoute component={Home} />} />
-        <Route path="/createCustomer" element={<ProtectedRoute component={CustomerForm} />} />
-        <Route path="/addData" element={<ProtectedRoute component={PackingDataForm} />} />
-      </Routes>
+      <div className="pt-16">
+        <Routes>
+          {/* Public routes */}
+          <Route path='/' element={<SigninForm />} />
+          <Route path='/Signup' element={<SignupForm />} />
+          <Route path='/ForgotPassword' element={<ForgotPassword />} />
+          <Route path='/ResetPassword/:resetToken' element={<ResetPassword />} />
+
+          {/* Private Routes */}
+          <Route path="/Home" element={<ProtectedRoute component={Home} />} />
+          <Route path="/createCustomer" element={<ProtectedRoute component={CustomerForm} />} />
+          <Route path="/addData" element={<ProtectedRoute component={PackingDataForm} />} />
+        </Routes>
+      </div>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
     </>
   );
