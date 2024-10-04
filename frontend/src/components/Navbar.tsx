@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
     };
 
     const toggleSidebar = () => {
-        setSidebarOpen(!sidebarOpen); // Toggle sidebar visibility
+        setSidebarOpen(!sidebarOpen);
     };
 
     useEffect(() => {
@@ -42,7 +42,7 @@ const Navbar: React.FC = () => {
 
     return (
         <>
-            <nav className="bg-gray-800 py-4 px-8 flex justify-between items-center fixed top-0 w-full z-10">
+            <nav className="bg-gray-800 py-4 px-8 flex justify-between items-center w-full">
                 <div className="flex items-center">
                     {/* Sidebar toggle button */}
                     <button

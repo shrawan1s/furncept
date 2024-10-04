@@ -40,8 +40,8 @@ const PackingList: React.FC = () => {
                                     <td className="py-3 px-6 text-left">{item.colorCode}</td>
                                     <td className="py-3 px-6 text-left">{item.material}</td>
                                     <td className="py-3 px-6 text-left">
-                                        <button className="px-4 py-2 text-white bg-blue-500 rounded-md mx-2">Edit</button>
-                                        <button className="px-4 py-2 text-white bg-red-500 rounded-md mx-2">Delete</button>
+                                        <button className="px-4 py-2 text-white bg-blue-500 rounded-md mx-2 w-full mb-2">Edit</button>
+                                        <button className="px-4 py-2 text-white bg-red-500 rounded-md mx-2 w-full">Delete</button>
                                     </td>
                                 </tr>
                             ))}

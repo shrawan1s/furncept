@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface ModalProps {
+type ModalProps = {
     title: string;
     content: string;
     onConfirm: () => void;

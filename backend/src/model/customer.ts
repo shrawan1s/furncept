@@ -29,19 +29,17 @@ Customer.init(
         name: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
         },
         email: {
             type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate: {
-                isEmail: true,
-            },
+            allowNull: true,
         },
     },
     {
         sequelize,
         tableName: 'customers',
+        timestamps: true,
     }
 );
 

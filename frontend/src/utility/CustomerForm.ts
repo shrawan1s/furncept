@@ -1,9 +1,5 @@
 export type CustomerFormValues = {
+    id?: number;
     name: string;
     email: string;
 }
-
-export const initialValues: CustomerFormValues = {
-    name: '',
-    email: ''
-};

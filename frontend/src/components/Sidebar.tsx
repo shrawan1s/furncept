@@ -26,17 +26,17 @@ const Sidebar: React.FC<PropTypes> = ({ sidebarOpen, toggleSidebar }) => {
                 </button>
             </div>
             <ul className="p-4">
-                <Link to="/Home">
+                <Link to="/Home" onClick={toggleSidebar}>
                     <li className={`py-2 px-2 rounded ${isActive('/Home') ? 'bg-gray-700' : 'hover:bg-gray-700'}`}>
                         Dashboard
                     </li>
                 </Link>
-                <Link to="/createCustomer">
+                <Link to="/createCustomer" onClick={toggleSidebar}>
                     <li className={`py-2 px-2 rounded ${isActive('/createCustomer') ? 'bg-gray-700' : 'hover:bg-gray-700'}`}>
                         Create Customer
                     </li>
                 </Link>
-                <Link to="/addData">
+                <Link to="/addData" onClick={toggleSidebar}>
                     <li className={`py-2 px-2 rounded ${isActive('/addData') ? 'bg-gray-700' : 'hover:bg-gray-700'}`}>
                         Add Data
                     </li>

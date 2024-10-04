@@ -10,7 +10,7 @@ router.post('/createcustomer', createCustomer);
 router.get('/getcustomer/:id', getCustomer);
 
 // Get all customers
-router.get('/getallcustomer', getAllCustomers);
+router.get('/getallcustomers', getAllCustomers);
 
 // Update customer details
 router.put('/updatecustomer/:id', updateCustomer);
